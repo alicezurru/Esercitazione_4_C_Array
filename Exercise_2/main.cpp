@@ -36,7 +36,17 @@ int main()
     istringstream convertn(nStr);
     int n;
     convertn>>c>>c>>n; //per mettere i primi 2 caratteri e poi il numero
-    ofstr<<fixed<<setprecision(2)<<"S = "<<S<<", n ="<<n<<endl;
+
+    //prima di cambiare la precisione salvo quella vecchia
+    ios prec(NULL);
+    prec.copyfmt(cout);
+
+    ofstr<<fixed<<setprecision(2)<<"S = "<<S<<", n = "<<n<<endl;
+
+    //la ricambio
+    cout.copyfmt(prec);
+    ofstr.copyfmt(prec);
+
 
     //terza riga
     string terza;
@@ -50,27 +60,33 @@ int main()
     istringstream convert;
     double r;
     double w;
-    string rString;
-    string wString;
+
+    ofstr<<"w = [ ";
     for (int i=0;i<n;i++) {
         getline(ifstr,line);
         convert=istringstream(line);
         convert>>w>>c>>r;
+        ofstr<<w<<" ";
         *(ptrw+i)=w;
-        *(ptrr+i)=r+1;
-        wString= wString + to_string(w) + " ";
-        rString= rString + to_string(r) + " ";
+        *(ptrr+i)=r;
     }
+    ofstr<<"]"<<endl;
 
-    ofstr<<"w= [ "<<wString<<"]"<<endl;
-    ofstr<<"r= [ "<<rString<<"]"<<endl;
+    //ho gia stampato w, ora stampo r
+    ofstr<<"r = [ ";
+    for (int i=0;i<n;i++) {
+        ofstr<<*(ptrr+i)<<" ";
+        //e gli aggiungo 1 per la formula successiva
+        *(ptrr+i)=*(ptrr+i)+1;
+    }
+    ofstr<<"]"<<endl;
 
     //sum[(ri+1)*wi]S
     double V= dot(ptrr,ptrw,n);
     V=V*S;
     double R=(V-S)/S;
 
-    ofstr<<fixed<<"Rate of return of the portfolio: "<<R<<endl;;
+    ofstr<<"Rate of return of the portfolio: "<<R<<endl;;
     ofstr<<fixed<<setprecision(2)<<"V: "<<V<<endl;
 
     delete [] ptrr;
