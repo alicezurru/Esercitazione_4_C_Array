@@ -34,7 +34,7 @@ int main()
     string nStr;
     getline(ifstr,nStr);
     istringstream convertn(nStr);
-    int n;
+    unsigned int n;
     convertn>>c>>c>>n; //per mettere i primi 2 caratteri e poi il numero
 
     //prima di cambiare la precisione salvo quella vecchia
@@ -44,7 +44,6 @@ int main()
     ofstr<<fixed<<setprecision(2)<<"S = "<<S<<", n = "<<n<<endl;
 
     //la ricambio
-    cout.copyfmt(prec);
     ofstr.copyfmt(prec);
 
 
@@ -66,18 +65,18 @@ int main()
         getline(ifstr,line);
         convert=istringstream(line);
         convert>>w>>c>>r;
-        ofstr<<w<<" ";
-        *(ptrw+i)=w;
-        *(ptrr+i)=r;
+        ofstr<<w<<" "; //comincio già a stampare il primo
+        ptrw[i]=w;
+        ptrr[i]=r;
     }
     ofstr<<"]"<<endl;
 
     //ho gia stampato w, ora stampo r
     ofstr<<"r = [ ";
     for (int i=0;i<n;i++) {
-        ofstr<<*(ptrr+i)<<" ";
+        ofstr<<(ptrr[i])<<" ";
         //e gli aggiungo 1 per la formula successiva
-        *(ptrr+i)=*(ptrr+i)+1;
+        ptrr[i]=ptrr[i]+1;
     }
     ofstr<<"]"<<endl;
 

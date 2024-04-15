@@ -1,3 +1,3 @@
 #pragma once
 
-double dot(double *p1, double *p2, int n);
+double dot(const double* const& p1, const double* const& p2,const unsigned int n);
