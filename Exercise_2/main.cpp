@@ -61,7 +61,7 @@ int main()
     double w;
 
     ofstr<<"w = [ ";
-    for (int i=0;i<n;i++) {
+    for (unsigned int i=0;i<n;i++) {
         getline(ifstr,line);
         convert=istringstream(line);
         convert>>w>>c>>r;
@@ -73,7 +73,7 @@ int main()
 
     //ho gia stampato w, ora stampo r
     ofstr<<"r = [ ";
-    for (int i=0;i<n;i++) {
+    for (unsigned int i=0;i<n;i++) {
         ofstr<<(ptrr[i])<<" ";
         //e gli aggiungo 1 per la formula successiva
         ptrr[i]=ptrr[i]+1;
